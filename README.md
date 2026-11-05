@@ -60,5 +60,5 @@ PyInstaller produces an application folder containing `BeControl.exe` and `_inte
 - `ui_widgets.py` contains the theme and shared interface widgets.
 - `chevron.svg` provides the dropdown icon.
 - `BeControl.spec` defines the Windows executable bundle.
-
+- `Profiller.txt` You can import your profile with this file / temp file  
 Third-party components retain their own licenses and copyright notices, supplied with the release.
