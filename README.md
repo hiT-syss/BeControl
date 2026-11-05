@@ -6,6 +6,7 @@ Control Windows games with hand gestures captured by your webcam. BeControl prov
 **Use the portable application**
 
 Extract the entire `BeControlExe` folder and open `BeControl.exe`. Keep the executable and its `_internal` folder together. The package includes its Python runtime and dependencies, so the recipient does not need to install Python. This release targets 64-bit Windows 10 and Windows 11.
+Move that application to C/ProgramFilesX86
 
 **Create your controls**
 
