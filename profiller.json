@@ -1,0 +1,73 @@
+{
+  "Spider-Man": {
+    "steering": true,
+    "bindings": [
+      [
+        "Kırmızı",
+        9,
+        [
+          "w",
+          "shift"
+        ],
+        "Tut"
+      ],
+      [
+        "Kırmızı",
+        3,
+        [
+          "space"
+        ],
+        "Bas"
+      ],
+      [
+        "Yeşil",
+        0,
+        [
+          "sol tık"
+        ],
+        "Tekrarla"
+      ],
+      [
+        "Yeşil",
+        2,
+        [
+          "sağ tık"
+        ],
+        "Bas"
+      ],
+      [
+        "Yeşil",
+        1,
+        [
+          "f"
+        ],
+        "Bas"
+      ]
+    ]
+  },
+  "Sims": {
+    "steering": false,
+    "bindings": []
+  },
+  "roblox": {
+    "steering": false,
+    "bindings": [
+      [
+        "Kırmızı",
+        15,
+        [
+          "space"
+        ],
+        "Bas"
+      ],
+      [
+        "Kırmızı",
+        1,
+        [
+          "w"
+        ],
+        "Tut"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+mediapipe==0.10.21
+opencv-contrib-python==4.11.0.86
+pydirectinput==1.0.4
+jax==0.4.38
+PySide6==6.8.3

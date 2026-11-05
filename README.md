@@ -1,112 +1,63 @@
-BeControl Guide
+BeControl
+=========
 
-If you think BeControl has room for improvement, see potential in the project, or have features you would like to see developed, you can share your feedback by creating an Issue on GitHub or sending an email to ozte2007@gmail.com.
+Control Windows games with hand gestures captured by your webcam. BeControl provides a live preview, a clickable hand selector, game profiles, and custom keyboard and mouse bindings.
 
-Installation
+**Use the portable application**
 
-Extract the entire BeControlExe folder from the archive. Then double-click BeControl.exe to launch the application.
+Extract the entire `BeControlExe` folder and open `BeControl.exe`. Keep the executable and its `_internal` folder together. The package includes its Python runtime and dependencies, so the recipient does not need to install Python. This release targets 64-bit Windows 10 and Windows 11.
 
-When moving or sharing the application, keep the BeControl.exe file and the _internal folder together. Python and all required libraries are included in the application.
+**Create your controls**
 
-System
+1. Open **Create game**, enter a project name, and create the profile.
+2. Choose the red or green hand. Click the fingers you will keep extended. Click a selected finger again to fold it.
+3. Select a keyboard key or mouse button. Add multiple keys to create a combination.
+4. Choose **Press**, **Hold**, or **Repeat**, then save the binding.
+5. Open **Play**, select the profile and an open game window, turn on the camera, and start control. Switch to the selected game.
 
-This release is designed for 64-bit Windows 10 and Windows 11 operating systems. A webcam is required to use the gesture control feature.
+For example, select only the ring finger, choose `shift`, and select **Hold**. Shift stays pressed while that gesture remains visible.
 
-Creating a Profile
+The preview is mirrored. The hand on the left of the image is red and the hand on the right is green. The selector supports all 16 combinations of the index, middle, ring, and little fingers. No selected fingers means a fist. All four selected fingers mean an open palm. Keep your hands upright for consistent recognition.
 
-Open the Create Game section to create a new profile.
+**Press** sends one short press when a gesture begins. **Hold** keeps the keys pressed while the gesture continues. **Repeat** sends repeated presses. Inputs are sent while the selected game window is in the foreground. Returning to BeControl or losing the camera feed releases held keys. Acceptance of simulated input depends on the game.
 
-Select the red or green hand. Click on the fingers to define your gesture. Then assign a keyboard key or mouse button to this gesture and save the profile.
+**Profiles**
 
-There are three different control modes:
+The portable application saves profiles in `%LOCALAPPDATA%\BeControl\profiles.json`. It can import a legacy `profiller.json` file from the application directory. Running the source uses `profiller.json` beside `app.py`.
 
-- Press: Presses the key once.
-- Hold: Keeps the key pressed.
-- Repeat: Repeatedly presses the key.
+Existing user profiles are retained with the source project. The distributable application includes default bindings only. The default Spider-Man profile includes swing, jump, attack, dodge, web-strike, and optional horizontal wrist steering.
 
-Game Control
+**Run the source**
 
-In the Play section, select the profile you created and an open game window.
+Install 64-bit Python 3.11, then open `Start.cmd`. The launcher creates a virtual environment when necessary and installs packages from `requirements.txt`. The first dependency installation requires an internet connection.
 
-Turn on the camera, start the control, and switch to your selected game.
+You can also run these commands from `MainCode`.
 
-When you return to the BeControl application or the camera feed is lost, any held keys are automatically released.
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe app.py
+```
 
-Camera and Hand Recognition
+**Build the portable package**
 
-The camera preview is displayed in mirrored mode.
+Build on 64-bit Windows with Python 3.11. From `MainCode`, install the build dependencies and run PyInstaller using the supplied specification.
 
-- Left side: Red hand
-- Right side: Green hand
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-build.txt
+.\.venv\Scripts\python.exe -m PyInstaller --noconfirm --distpath ..\BeControlExe-build --workpath ..\build-work BeControl.spec
+```
 
-Keep your hands upright for consistent gesture recognition.
+PyInstaller produces an application folder containing `BeControl.exe` and `_internal`. Distribute the complete folder. Keep the supplied third-party license files with the application.
 
-Profile Storage
+**Source files**
 
-Your created profiles are saved at the following location:
+- `app.py` contains the application window, profiles, and control workflow.
+- `kamera_gozlemci.py` processes camera frames and recognizes gestures.
+- `oyun_tetikleyici.py` manages keyboard and mouse input for the selected window.
+- `hand_picker.py` implements the clickable hand selector.
+- `ui_widgets.py` contains the theme and shared interface widgets.
+- `chevron.svg` provides the dropdown icon.
+- `BeControl.spec` defines the Windows executable bundle.
 
-`%LOCALAPPDATA%\BeControl\profiles.json`
-
-The application can import an older profiller.json file placed in the same folder as BeControl.exe.
-
-The shared release contains only the default profiles.
-
-
-
-
-BeControl 
-
-BeControl'ün geliştirilmeye açık olduğunu düşünüyor, projede potansiyel görüyor veya geliştirilmesini istediğiniz özellikler bulunuyorsa geri bildirimlerinizi GitHub üzerinden Issue oluşturarak ya da ozte2007@gmail.com adresine e-posta gönderebilirsiniz.
-
-Kurulum
-
-BeControlExe klasörünün tamamını arşivden çıkarın. Ardından BeControl.exe dosyasına çift tıklayarak uygulamayı başlatın.
-
-Uygulamayı taşırken veya paylaşırken BeControl.exe dosyasını ve _internal klasörünü birlikte tutun. Python ve gerekli tüm kütüphaneler uygulamaya dahildir.
-
-sistem
-
-Bu sürüm, 64 bit Windows 10 ve Windows 11 işletim sistemleri için geliştirilmiştir. El hareketleriyle kontrol özelliğini kullanabilmek için bir web kamerası gereklidir.
-
-Profil Oluşturma
-
-Yeni bir profil oluşturmak için **Create Game (Oyun Oluştur)** bölümünü açın.
-
-Kırmızı veya yeşil eli seçin. Hareketinizi tanımlamak için parmaklara tıklayın. Ardından bu harekete bir klavye tuşu veya fare düğmesi atayın ve profili kaydedin.
-
-Üç farklı kontrol modu bulunmaktadır:
-
-- Press (Bas): Tuşa bir kez basar.
-- Hold (Basılı Tut):** Tuşu basılı tutar.
-- Repeat (Tekrarla):** Tuşa tekrar tekrar basar.
-
-Oyun Kontrolü
-
-play bölümünde oluşturduğunuz profili ve açık olan oyun penceresini seçin.
-
-Kamerayı açın, kontrolü başlatın ve seçtiğiniz oyuna geçiş yapın.
-
-BeControl uygulamasına geri döndüğünüzde veya kamera görüntüsü kaybolduğunda basılı tutulan tuşlar otomatik olarak serbest bırakılır.
-
-Kamera ve El Algılama
-
-Kamera önizlemesi aynalanmış şekilde gösterilir.
-
-- Sol taraf: Kırmızı el
-- Sağ taraf: Yeşil el
-
-El hareketlerinin tutarlı şekilde algılanması için ellerinizi dik konumda tutun.
-
-Profil Kayıtları
-
-Oluşturduğunuz profiller aşağıdaki konuma kaydedilir:
-
-`%LOCALAPPDATA%\BeControl\profiles.json`
-
-Uygulama, BeControl.exe dosyasıyla aynı klasöre yerleştirilmiş eski bir profiller.json dosyasını içe aktarabilir.
-
-Paylaşılan sürüm yalnızca varsayılan profilleri içerir.
-
-
-
-
+Third-party components retain their own licenses and copyright notices, supplied with the release.
